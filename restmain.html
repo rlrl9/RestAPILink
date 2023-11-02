@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>REST API 실습</h1><hr>
+<button id="details">둘리와 친구들 보기</button><hr>
+<div style="display:none" id="buttons">
+    <button id="dooly">둘리</button>
+    <button id="ddochi">또치</button>
+    <button id="dauner">도우너</button><hr>
+</div>
+<div id="detailInfo">
+    <div id="name"></div>
+    <div id="address"></div>
+    <img id="profileImg">
+</div>
+
+</body>
+<script>
+    document.getElementById('details').addEventListener('click',function (){
+        document.getElementById("buttons").style.display='block';
+        document.getElementById("detailInfo").style.display='none';
+    });
+    document.getElementById('dooly').addEventListener('click',function (){
+        document.getElementById("buttons").style.display='none';
+        document.getElementById("detailInfo").style.display='block';
+        fetch('/dooly')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('name').textContent=`${data.name}`;
+                document.getElementById('address').textContent=`${data.addr}`;
+                document.getElementById('profileImg').src="/images/"+`${data.image}`;
+            })
+            .catch(error => console.error('Error:', error));
+    });
+    document.getElementById('ddochi').addEventListener('click',function (){
+        document.getElementById("buttons").style.display='none';
+        document.getElementById("detailInfo").style.display='block';
+        fetch('/ddochi')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('name').textContent=`${data.name}`;
+                document.getElementById('address').textContent=`${data.addr}`;
+                document.getElementById('profileImg').src="/images/"+`${data.image}`;
+            })
+            .catch(error => console.error('Error:', error));
+    });
+    document.getElementById('dauner').addEventListener('click',function (){
+        document.getElementById("buttons").style.display='none';
+        document.getElementById("detailInfo").style.display='block';
+        fetch('/dauner')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('name').textContent=`${data.name}`;
+                document.getElementById('address').textContent=`${data.addr}`;
+                document.getElementById('profileImg').src=`/images/${data.image}`;
+            })
+            .catch(error => console.error('Error:', error));
+    });
+</script>
+</html>
